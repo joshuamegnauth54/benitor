@@ -1,0 +1,29 @@
+[package]
+name = "benitor"
+description = "Ben + Editor = benitor. Benitor edits torrents, resume files, and configs."
+authors = ["Joshua Megnauth <>"]
+version = "0.1.0"
+edition = "2021"
+repository = "https://github.com/joshuamegnauth54/benitor/"
+license = "MIT"
+keywords = ["torrent", "parse", "cross-platform", "gui", "p2p"]
+categories = ["config", "parsing"]
+
+[profile.release]
+strip = true
+lto = true
+
+[workspace]
+members = ["crates/*"]
+
+[features]
+default = ["settings-editor", "gui", "logging"]
+logging = ["dep:log", "dep:pretty_env_logger"]
+settings-editor = ["bedit-settings"]
+gui = ["iced"]
+
+[dependencies]
+bedit-settings = { path = "crates/bedit-settings", optional = true }
+iced = { version = "0.4.2", optional = true }
+log = { version = "0.4", optional = true }
+pretty_env_logger = { version = "0.4", optional = true }
